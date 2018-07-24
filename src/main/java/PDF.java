@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
-public class PDF {
+class PDF {
     private Document doc = null;
     private Font wordFont;
     private Font phoFont;
@@ -58,5 +58,21 @@ public class PDF {
             para.add(new Chunk(word.getTrans(), transFont));
             doc.add(para);
         }
+    }
+
+    void printList(List<Word> wordList, boolean printOption) throws Exception {
+        if (printOption) printList(wordList);
+        else {
+            for (Word word :
+                    wordList) {
+                Paragraph para = new Paragraph();
+                Font underline = new Font(Font.FontFamily.HELVETICA, 11, Font.UNDERLINE);
+                para.add(new Chunk("           ", underline));
+                para.add(Chunk.NEWLINE);
+                para.add(new Chunk(word.getTrans(), transFont));
+                doc.add(para);
+            }
+        }
+
     }
 }
